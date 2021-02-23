@@ -34,6 +34,10 @@ public struct SunburstView: View {
         return ForEach(arcs) { arc in
             ArcView(arc: arc, configuration: self.sunburst.configuration).onTapGesture {
                 guard self.sunburst.configuration.allowsSelection else { return }
+                if (arc.node.onTap != nil) {
+                    arc.node.onTap!()
+                    return
+                }
                 if self.sunburst.configuration.selectedNode == arc.node && self.sunburst.configuration.focusedNode == arc.node {
                     self.sunburst.configuration.focusedNode = self.sunburst.configuration.parentForNode(arc.node)
                 } else if self.sunburst.configuration.selectedNode == arc.node {

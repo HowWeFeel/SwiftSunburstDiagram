@@ -88,15 +88,29 @@ public struct Node: Identifiable, Equatable {
     // Internal values
     var computedValue: Double = 0.0
     var computedBackgroundColor: UIColor = .systemGray
-
+    var onTap: (() -> Void)? = nil
+    public static func == (lhs: Node, rhs: Node) -> Bool {
+            return
+                lhs.id == rhs.id &&
+                lhs.name == rhs.name &&
+                lhs.value == rhs.value &&
+                lhs.children == rhs.children &&
+                lhs.showName == rhs.showName &&
+                lhs.image == rhs.image &&
+                lhs.backgroundColor == rhs.backgroundColor &&
+                lhs.computedValue == rhs.computedValue &&
+                lhs.computedBackgroundColor == rhs.computedBackgroundColor
+        }
+    
     public init(name: String, showName: Bool = true, image: UIImage? = nil,
-                value: Double? = nil, backgroundColor: UIColor? = nil, children: [Node] = []) {
+                value: Double? = nil, backgroundColor: UIColor? = nil, children: [Node] = [], onTap: (() -> Void)? = nil) {
         self.name = name
         self.showName = showName
         self.image = image
         self.value = value
         self.backgroundColor = backgroundColor
         self.children = children
+        self.onTap = onTap
     }
 }
 
